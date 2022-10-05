@@ -17,7 +17,6 @@
 # Defining an initial value
 import pygame
 from random import randint
-import os
 from math import sqrt
 
 pygame.font.init()
@@ -67,12 +66,6 @@ PUNTOS_FONT = pygame.font.SysFont('comicsans',20)
 WINNER_FONT = pygame.font.SysFont('comicsans',100)
 
 #CARGA DE IMAGENES
-# blue_spaceship_image = pygame.image.load(
-#     os.path.join('Assets','spaceship_blue.png'))
-# blue_spaceship = pygame.transform.rotate(
-#     pygame.transform.scale(
-#         blue_spaceship_image,(anchonave,altonave)),90)
-#SPACE = pygame.transform.scale(pygame.image.load(os.path.join('Assets','space.png')),(WIDTH,HEIGHT))
 
 #MOVIMIENTO DE LOS LIBEROS
 def blue_handle_movement(keys_pressed,blue):
@@ -259,10 +252,6 @@ def lanzador(ball1,ball2,blue,COLU2,COLU4,COLU6,ballvelx1,ballvely1,ballvelx2,ba
 #DIBUJO DE LA VENTANA
 def draw_window(red,blue,ball1,ball2,blu_points,red_points,bluecol,redcol,COLU1, COLU2, COLU3, COLU4, COLU5, COLU6):
     WIND.fill(GREC)
-    # WIND.blit(SPACE,(0,0))
-    
-    # WIND.blit(blue,(blue.x,blue.y))
-    # WIND.blit(red,(red.x,red.y))
 
     red_health_text = PUNTOS_FONT.render("POINTS: " + str(red_points),1,WHIC)
     blu_health_text = PUNTOS_FONT.render("POINTS: " + str(blu_points),1,WHIC)
@@ -311,22 +300,28 @@ def main():
     ball2_with = ""
 
     pygame.init()
-
+    
+    #Jugadores
     red = pygame.Rect(WIDTH//2 + 100,(HEIGHT//2)-(ALJUGA//2),ANJUGA, ALJUGA)
     blue = pygame.Rect(WIDTH//2 - 100,(HEIGHT//2)-(ALJUGA//2),ANJUGA, ALJUGA)
-
+    
+    #Bolas
     ball1 = pygame.Rect(WIDTH//2,HEIGHT//2-(ALCIRC//2),ANCIRC, ALCIRC)
     ball2 = pygame.Rect(WIDTH//2,HEIGHT//2-(ALCIRC//2),ANCIRC, ALCIRC)
-
+    
+    #Puntos
     red_points = 0
     blu_points = 0
-
+    
+    #Ese jugador tiene una bola
     red_ball = False
     blu_ball = False
 
+    #PORTEROS
     bluecol = pygame.Rect(POSX3-2,POSY3-2,ANPORT,ALPORT)
     redcol = pygame.Rect(POSX4-2,POSY4-2,ANPORT,ALPORT)
-
+    
+    #PORTERIAS
     COLU1 = pygame.Rect(POSX1,POSY1,ANCOLU,ALCOLU)
     COLU2 = pygame.Rect(POSX2,POSY2,ANCOLU,ALCOLU)
     COLU3 = pygame.Rect(POSX3,POSY3,ANCOLU,ALCOLU)
@@ -353,7 +348,7 @@ def main():
                 if event.key == pygame.K_RCTRL and red_ball:
                     ballvelx1,ballvely1,ballvelx2,ballvely2,red_ball,ball1_with,ball2_with = lanzador(ball1,ball2,red,COLU1,COLU3,COLU5,ballvelx1,ballvely1,ballvelx2,ballvely2,red_ball,ball1_with,ball2_with,"red")
                     
-            #EVENTOS DE TIPO PUNTUACION, SOLO UNA BOLA DE MOMENTO
+            #EVENTOS DE TIPO PUNTUACION
             if event.type == COL1_HIT:
                 red_points += 1
                 # BULLET_HIT_SOUND.play()
